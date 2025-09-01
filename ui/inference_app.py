@@ -86,7 +86,7 @@ with st.sidebar:
 # Main content
 if st.session_state.models_loaded:
     # Input tabs
-    tab1, tab2, tab3 = st.tabs(["📤 Upload Data", "✏️ Manual Entry", "🎲 Sample Data"])
+    tab1, tab3 = st.tabs(["📤 Upload Data", "🎲 Sample Data"])
     
     input_data = None
     
@@ -113,40 +113,40 @@ if st.session_state.models_loaded:
                 st.error(f"Missing required columns: {missing_cols}")
                 input_data = None
     
-    with tab2:
-        st.markdown("### Enter Recent Sales Data")
+    # with tab2:
+    #     st.markdown("### Enter Recent Sales Data")
         
-        col1, col2 = st.columns(2)
-        with col1:
-            store_id = st.text_input("Store ID", value="store_001")
-        with col2:
-            st.info("Enter sales for the last 7 days")
+    #     col1, col2 = st.columns(2)
+    #     with col1:
+    #         store_id = st.text_input("Store ID", value="store_001")
+    #     with col2:
+    #         st.info("Enter sales for the last 7 days")
         
-        # Create input grid
-        st.markdown("#### Daily Sales Input")
-        cols = st.columns(7)
-        manual_data = []
+    #     # Create input grid
+    #     st.markdown("#### Daily Sales Input")
+    #     cols = st.columns(7)
+    #     manual_data = []
         
-        for i in range(7):
-            date = datetime.now() - timedelta(days=6-i)
-            with cols[i]:
-                st.caption(date.strftime('%a %m/%d'))
-                sales = st.number_input(
-                    "Sales ($)",
-                    min_value=0,
-                    value=5000 + i*100,
-                    key=f"manual_{i}",
-                    label_visibility="collapsed"
-                )
-                manual_data.append({
-                    'date': date,
-                    'store_id': store_id,
-                    'sales': sales
-                })
+    #     for i in range(7):
+    #         date = datetime.now() - timedelta(days=6-i)
+    #         with cols[i]:
+    #             st.caption(date.strftime('%a %m/%d'))
+    #             sales = st.number_input(
+    #                 "Sales ($)",
+    #                 min_value=0,
+    #                 value=5000 + i*100,
+    #                 key=f"manual_{i}",
+    #                 label_visibility="collapsed"
+    #             )
+    #             manual_data.append({
+    #                 'date': date,
+    #                 'store_id': store_id,
+    #                 'sales': sales
+    #             })
         
-        if st.button("Use Manual Data", key="manual_btn"):
-            input_data = pd.DataFrame(manual_data)
-            st.success("✅ Manual data ready for prediction")
+    #     if st.button("Use Manual Data", key="manual_btn"):
+    #         input_data = pd.DataFrame(manual_data)
+    #         st.success("✅ Manual data ready for prediction")
     
     with tab3:
         st.markdown("### Generate Sample Data")

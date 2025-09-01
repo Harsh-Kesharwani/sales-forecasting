@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11-bullseye
 
 # Install system dependencies for LightGBM and other libraries
 RUN apt-get update && apt-get install -y \

@@ -11,7 +11,7 @@ import sys
 default_args = {
     "owner": "data-team",
     "depends_on_past": False,
-    "start_date": datetime(2025, 8, 31),
+    "start_date": datetime(2025, 9, 1),
     "email_on_failure": True,
     "email_on_retry": False,
     "email": ["admin@example.com"],
@@ -22,7 +22,7 @@ default_args = {
 
 @dag(
     schedule="@weekly",
-    start_date=datetime(2025, 7, 22),
+    start_date=datetime(2025, 9, 1),
     catchup=False,
     default_args=default_args,
     description="Train sales forecasting models",
@@ -40,7 +40,7 @@ def sales_forecast_training():
 
         data_output_dir = "/tmp/sales_data"
         generator = RealisticSalesDataGenerator(
-            start_date="2021-01-01", end_date="2021-02-28"  # Fixed invalid date
+            start_date="2021-01-01", end_date="2021-12-31"  # Fixed invalid date
         )
         print("Generating realistic sales data...")
         file_paths = generator.generate_sales_data(output_dir=data_output_dir)

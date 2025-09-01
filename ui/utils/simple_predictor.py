@@ -220,7 +220,8 @@ class SimplePredictor:
                 'total_predicted_sales': predictions.sum(),
                 'average_daily_sales': predictions.mean(),
                 'max_daily_sales': predictions.max(),
-                'min_daily_sales': predictions.min()
+                'min_daily_sales': predictions.min(),
+                'forecast_days': forecast_days
             }
             
             return {

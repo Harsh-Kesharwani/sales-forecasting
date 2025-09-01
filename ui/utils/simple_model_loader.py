@@ -81,14 +81,35 @@ class SimpleModelLoader:
             models_dir = os.path.join(artifacts_path, "models")
             if os.path.exists(models_dir):
                 # Load XGBoost
-                xgb_path = os.path.join(models_dir, "xgboost", "xgboost_model.pkl")
-                if os.path.exists(xgb_path):
+                # xgb_path = os.path.join(models_dir, "xgboost", "xgboost_model.pkl")
+                # if os.path.exists(xgb_path):
+                #     try:
+                #         self.models['xgboost'] = joblib.load(xgb_path)
+                #         logger.info("Loaded XGBoost model")
+                #     except Exception as e:
+                #         logger.warning(f"Could not load XGBoost with joblib, trying pickle: {e}")
+                #         with open(xgb_path, 'rb') as f:
+                #             self.models['xgboost'] = pickle.load(f)
+                #         logger.info("Loaded XGBoost model with pickle")
+                
+                xgb_json_path = os.path.join(models_dir, "xgboost", "xgboost_model.json")
+                xgb_pkl_path = os.path.join(models_dir, "xgboost", "xgboost_model.pkl")
+
+                if os.path.exists(xgb_json_path):
                     try:
-                        self.models['xgboost'] = joblib.load(xgb_path)
-                        logger.info("Loaded XGBoost model")
+                        xgb_model = xgb.XGBModel()
+                        xgb_model.load_model(xgb_json_path)
+                        self.models['xgboost'] = xgb_model
+                        logger.info("Loaded XGBoost model from JSON")
+                    except Exception as e:
+                        logger.error(f"Failed to load XGBoost model from JSON: {e}")
+                elif os.path.exists(xgb_pkl_path):
+                    try:
+                        self.models['xgboost'] = joblib.load(xgb_pkl_path)
+                        logger.info("Loaded XGBoost model from pickle")
                     except Exception as e:
                         logger.warning(f"Could not load XGBoost with joblib, trying pickle: {e}")
-                        with open(xgb_path, 'rb') as f:
+                        with open(xgb_pkl_path, 'rb') as f:
                             self.models['xgboost'] = pickle.load(f)
                         logger.info("Loaded XGBoost model with pickle")
                 
