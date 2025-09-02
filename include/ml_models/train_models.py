@@ -715,8 +715,15 @@ class ModelTrainer:
         os.makedirs('/tmp/models/lightgbm', exist_ok=True)
         os.makedirs('/tmp/models/ensemble', exist_ok=True)
         
+        # if 'xgboost' in self.models:
+        #     joblib.dump(self.models['xgboost'], '/tmp/models/xgboost/xgboost_model.pkl')
         if 'xgboost' in self.models:
-            joblib.dump(self.models['xgboost'], '/tmp/models/xgboost/xgboost_model.pkl')
+            # Assuming self.models['xgboost'] is an xgboost.XGBModel or Booster
+            xgb_model = self.models['xgboost']
+            # Create directory if not exists
+            os.makedirs('/tmp/models/xgboost', exist_ok=True)
+            # Save model in recommended format
+            xgb_model.save_model('/tmp/models/xgboost/xgboost_model.json')
         
         if 'lightgbm' in self.models:
             joblib.dump(self.models['lightgbm'], '/tmp/models/lightgbm/lightgbm_model.pkl')
