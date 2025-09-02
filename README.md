@@ -122,7 +122,11 @@ Input Data → Feature Engineering → Model Prediction → Visualization → Ex
 - **Model Accuracy**: MAPE < 5% on test data
 - **Ensemble Performance**: 15-20% improvement over individual models
 
+## Results
 
+![alt text](image.png)
+
+### This results are based on training models over last 1 year data 
 ## 🐛 Troubleshooting
 
 ### Common Issues
@@ -143,6 +147,7 @@ docker-compose -f docker-compose.override.yml logs mlflow
 docker-compose -f docker-compose.override.yml logs streamlit
 ```
 
+
 ## 📚 Documentation
 
 - [Detailed Architecture](docs/ARCHITECTURE.md)
@@ -159,3 +164,5 @@ docker-compose -f docker-compose.override.yml logs streamlit
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.# sales-forecasting
+
+
